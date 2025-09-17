@@ -1,0 +1,76 @@
+
+.font-inter {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Toggle switch styles */
+input[type="checkbox"]:checked + label .w-10 {
+    background-color: #3b82f6;
+}
+
+input[type="checkbox"]:checked + label .w-5 {
+    transform: translateX(1rem);
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 1024px) {
+    .flex {
+        flex-direction: column;
+    }
+    
+    .lg\:flex-\[0\.6\] {
+        flex: 1;
+    }
+    
+    .lg\:flex-\[0\.4\] {
+        flex: 1;
+        min-height: 40vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-4xl {
+        font-size: 2rem;
+    }
+    
+    .p-8 {
+        padding: 1.5rem;
+    }
+    
+    .max-w-md {
+        max-width: 100%;
+    }
+}
+
+
+/*  transitions */
+* {
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+button:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

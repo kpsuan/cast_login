@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - jowibee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-white font-inter">
+    <!-- Main Content -->
+    <div class="flex min-h-screen">
+        <!-- Left Section - si jollibee -->
+        <div class="hidden md:flex flex-1 lg:flex-[0.6] relative overflow-hidden">
+            <!-- bg image with overlay ex: jowibe chickenjoy-->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/jowibe.png');">
+                <div class="absolute inset-0 bg-gradient-to-b from-purple-900/60 via-purple-800/40 to-orange-400/60"></div>
+            </div>
+            
+            <!-- Content overlay -->
+            <div class="relative z-10 h-full flex flex-col justify-between p-8 lg:p-12">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-2">
+                            <img src="assets/logo.png" alt="Logo" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <span class="text-red-500 font-bold text-xl">jolibi</span>
+                    </div>
+                </div>
+                
+                <!-- text content -->
+                <div class="text-white">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                        Jollibee, bida ang saya!
+                    </h1>
+                    <p class="text-lg lg:text-xl leading-relaxed opacity-90 max-w-2xl">
+                        Mula sa unang kagat ng Chickenjoy hanggang sa tamis ng Jolly Spaghetti, bawat bisita ay nadadala sa mundo ng saya at ligaya. Dito sa Jollibee, bawat pagkain ay kwento, bawat tawa ay espesyal, at bawat sandali ay puno ng kasiyahan. Halina’t maranasan ang saya na hatid ng paboritong bida ng bawat pamilya—Jollibee!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section - Login Form -->
+        <div class="flex-1 lg:flex-[0.4] bg-white flex items-center justify-center p-4 lg:p-8">
+            <div class="w-full max-w-md">
+                <!-- Mobile Logo (visible only on mobile) -->
+                <div class="md:hidden flex items-center justify-center mb-8">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-2">
+                            <img src="assets/logo.png" alt="Logo" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <span class="text-red-500 font-bold text-xl">jolibi</span>
+                    </div>
+                </div>
+
+                <!-- Sign In Title -->
+                <h2 class="text-3xl font-bold text-black mb-2 text-center md:text-left">Welcome Back</h2>
+                
+                <!-- Login Form -->
+                <form class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-black text-sm font-medium mb-2">
+                            Enter your email address 
+                        </label>
+                        <input 
+                            type="text" 
+                            id="email" 
+                            placeholder="Email address"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-red-500 transition-colors"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-black text-sm font-medium mb-2">
+                            Enter your Password
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                placeholder="Password"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-red-500 transition-colors"
+                            >
+                            <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" class="sr-only">
+                            <label for="remember" class="flex items-center cursor-pointer">
+                                <div class="w-10 h-6 bg-gray-300 rounded-full relative transition-colors">
+                                    <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-transform"></div>
+                                </div>
+                                <span class="ml-3 text-gray-600 text-sm">Remember me</span>
+                            </label>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm hover:text-blue-600 transition-colors">Forgot password?</a>
+                    </div>
+
+                    <!-- Sign In Button -->
+                    <button type="submit" class="w-full bg-gradient-to-b from-red-400 to-red-600 text-white font-bold py-4 rounded-lg hover:from-red-500 hover:to-red-700 transition-all duration-200 ">
+                        Log In
+                    </button>
+
+                    <!-- Sign Up Link -->
+                    <div class="text-center">
+                        <span class="text-gray-600">Dont have an account?</span>
+                        <a href="#" class="text-blue-400 ml-1 hover:text-blue-600 transition-colors">Sign up now</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
