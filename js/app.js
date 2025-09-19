@@ -92,6 +92,19 @@ const UI = {
         if (lastNameEl) lastNameEl.textContent = lastName;
         if (profileEmail) profileEmail.textContent = email;
         
+        // Update left sidebar content
+        const leftHeading = getElement('leftHeadingProfile');
+        const leftDescription = getElement('leftDescriptionProfile');
+        const leftLogoText = getElement('leftLogoTextProfile');
+        
+        if (leftHeading) leftHeading.textContent = 'Mabuhay!';
+        if (leftDescription) leftDescription.textContent = 'You have successfully logged in to your Jollibee account. Enjoy your favorite meals and discover new flavors!';
+        if (leftLogoText) leftLogoText.textContent = 'jolibi';
+        
+        // Update right section heading
+        const rightHeading = getElement('rightHeading');
+        if (rightHeading) rightHeading.textContent = 'Profile';
+        
         // Setup logout button
         const logoutButton = getElement('logoutButton');
         if (logoutButton) {
@@ -108,6 +121,17 @@ const UI = {
     
     showLogin() {
         localStorage.removeItem(CONFIG.TOKEN_KEY);
+        
+        // Reset left sidebar content
+        const leftHeading = getElement('leftHeading');
+        const leftDescription = getElement('leftDescription');
+        
+        if (leftHeading) leftHeading.textContent = 'Bida ang saya!';
+        if (leftDescription) leftDescription.textContent = 'Mula sa unang kagat ng Chickenjoy hanggang sa tamis ng Jolly Spaghetti, bawat bisita ay nadadala sa mundo ng saya at ligaya. Dito sa Jollibee, bawat pagkain ay kwento, bawat tawa ay espesyal, at bawat sandali ay puno ng kasiyahan. Halina\'t maranasan ang saya na hatid ng paboritong bida ng bawat pamilya—Jollibee!';
+        
+        // Reset right section heading
+        const rightHeading = getElement('rightHeading');
+        if (rightHeading) rightHeading.textContent = 'Welcome Back';
         
         const profileContainer = getElement('profileContainer');
         const loginContainer = getElement('loginContainer');
@@ -200,4 +224,15 @@ const Events = {
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
     Events.init();
+    
+    // Initialize left sidebar content
+    const leftHeading = getElement('leftHeading');
+    const leftDescription = getElement('leftDescription');
+    const leftLogoText = getElement('leftLogoText');
+    const mobileLogoText = getElement('mobileLogoText');
+    
+    if (leftHeading) leftHeading.textContent = 'Bida ang saya!';
+    if (leftDescription) leftDescription.textContent = 'Mula sa unang kagat ng Chickenjoy hanggang sa tamis ng Jolly Spaghetti, bawat bisita ay nadadala sa mundo ng saya at ligaya. Dito sa Jollibee, bawat pagkain ay kwento, bawat tawa ay espesyal, at bawat sandali ay puno ng kasiyahan. Halina\'t maranasan ang saya na hatid ng paboritong bida ng bawat pamilya—Jollibee!';
+    if (leftLogoText) leftLogoText.textContent = 'jolibi';
+    if (mobileLogoText) mobileLogoText.textContent = 'jolibi';
 });
