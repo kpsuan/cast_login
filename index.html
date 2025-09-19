@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - jowibee</title>
+    <title>Sign In - Jollibee</title>
+    <meta name="description" content="Sign in to your Jollibee account and enjoy your favorite meals">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="min-h-screen bg-white font-['Inter',sans-serif] transition-all duration-200">
-    <main class="flex min-h-screen">
+    <!-- Login Form Container -->
+    <main id="loginContainer" class="flex min-h-screen">
         <!-- Left Section -->
         <section class="hidden md:flex flex-1 lg:flex-[0.6] relative bg-cover bg-center bg-no-repeat" style="background-image: url('assets/jowibe.png');">
-            <div class="absolute inset-0 bg-gradient-to-b from-purple-900/60 via-purple-800/40 to-orange-400/60"></div>
             <header class="relative z-10 flex flex-col justify-between h-full p-8 lg:p-12">
+                <!-- Logo and Brand -->
                 <div class="flex items-center">
-                    <img src="assets/logo.png" alt="Logo" class="w-8 h-8 rounded-full mr-2">
+                    <img src="assets/logo.png" alt="Jollibee Logo" class="w-8 h-8 rounded-full mr-2" loading="eager">
                     <span class="text-red-500 font-bold text-xl">jolibi</span>
                 </div>
-                <div class="text-white">
-                    <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                        Jollibee, bida ang saya!
+                
+                <!-- Main Content -->
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-3 leading-tight text-white">
+                        Bida ang saya!
                     </h1>
-                    <p class="text-lg lg:text-xl leading-relaxed opacity-90 max-w-2xl">
+                    <p class="text-lg lg:text-xl leading-relaxed opacity-90 max-w-2xl text-white">
                         Mula sa unang kagat ng Chickenjoy hanggang sa tamis ng Jolly Spaghetti, bawat bisita ay nadadala sa mundo ng saya at ligaya. Dito sa Jollibee, bawat pagkain ay kwento, bawat tawa ay espesyal, at bawat sandali ay puno ng kasiyahan. Halina't maranasan ang saya na hatid ng paboritong bida ng bawat pamilya—Jollibee!
                     </p>
                 </div>
@@ -30,73 +34,190 @@
 
         <!-- Right Section - Login Form -->
         <section class="flex-1 lg:flex-[0.4] bg-white flex items-center justify-center p-4 lg:p-8">
-            <form class="w-full max-w-md space-y-6" autocomplete="on">
+            <div class="w-full max-w-md space-y-6">
                 <!-- Mobile Logo -->
-                <div class="md:hidden flex items-center justify-center mb-8">
-                    <img src="assets/logo.png" alt="Logo" class="w-8 h-8 rounded-full mr-2">
+                <div class="md:hidden text-center mb-8">
+                    <img src="assets/logo.png" alt="Jollibee Logo" class="w-8 h-8 rounded-full mx-auto mb-2" loading="eager">
                     <span class="text-red-500 font-bold text-xl">jolibi</span>
                 </div>
                 
-                <h2 class="text-3xl font-bold text-black mb-2 text-center md:text-left">Welcome Back</h2>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2 text-center md:text-left">Welcome Back</h2>
+                
+                <!-- Test Credentials Info -->
+                <div class="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm" role="alert">
+                    <strong>Test Credentials:</strong><br>
+                    Username: <code class="bg-blue-100 px-1 rounded">emilys</code> | 
+                    Password: <code class="bg-blue-100 px-1 rounded">emilyspass</code>
+                </div>
+                
+                <!-- Error Message -->
+                <div id="errorMessage" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm" role="alert">
+                    <span id="errorText"></span>
+                </div>
 
-                <!-- Email Field -->
-                <label for="email" class="block text-black text-sm font-medium mb-2">
-                    Enter your email address 
-                </label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email"
-                    placeholder="Email address"
-                    required
-                    autocomplete="email"
-                    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-                    title="Please enter a valid email address"
-                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 valid:border-green-500 transition-colors"
-                >
-
-                <!-- Password Field -->
-                <label for="password" class="block text-black text-sm font-medium mb-2">
-                    Enter your Password
-                </label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password"
-                    placeholder="Password"
-                    required
-                    minlength="8"
-                    maxlength="128"
-                    autocomplete="current-password"
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                    title="Password must contain at least 8 characters with uppercase, lowercase, number, and special character"
-                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 valid:border-green-500 transition-colors"
-                >
-
-                <!-- Remember Me & Forgot Password -->
-                <div class="flex items-center justify-between">
-                    <label for="remember" class="flex items-center cursor-pointer group">
-                        <input type="checkbox" id="remember" name="remember" class="w-4 h-4 text-red-500 bg-gray-100 border-gray-300 rounded">
-                        <span class="ml-3 text-gray-600 text-sm group-hover:text-gray-800 transition-colors">Remember me</span>
+                <!-- Login Form -->
+                <form id="loginForm" class="space-y-6" autocomplete="on" novalidate>
+                    <!-- Username Field -->
+                    <label for="username" class="block text-gray-700 text-sm font-medium mb-2">
+                        Enter your username
                     </label>
-                    <a href="#" class="text-blue-400 text-sm hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400/20 rounded">Forgot password?</a>
-                </div>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username"
+                        placeholder="Username"
+                        required
+                        autocomplete="username"
+                        minlength="3"
+                        maxlength="50"
+                        title="Please enter your username (3-50 characters)"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 valid:border-green-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    >
 
-                <!-- Submit Button -->
-                <button 
-                    type="submit" 
-                    class="w-full bg-gradient-to-b from-red-400 to-red-600 text-white font-bold py-4 rounded-lg hover:from-red-500 hover:to-red-700 focus:outline-none focus:ring-4 focus:ring-red-500/20 transition-all duration-200 active:scale-[0.98]"
-                >
-                    Log In
-                </button>
+                    <!-- Password Field -->
+                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">
+                        Enter your Password
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password"
+                        placeholder="Password"
+                        required
+                        minlength="6"
+                        autocomplete="current-password"
+                        title="Password must be at least 6 characters long"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 valid:border-green-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    >
 
-                <!-- Sign Up Link -->
-                <div class="text-center">
-                    <span class="text-gray-600">Dont have an account?</span>
-                    <a href="#" class="text-blue-400 ml-1 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400/20 rounded">Sign up now</a>
-                </div>
-            </form>
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="flex items-center justify-between">
+                        <label for="remember" class="flex items-center cursor-pointer group">
+                            <input 
+                                type="checkbox" 
+                                id="remember" 
+                                name="remember" 
+                                class="w-4 h-4 text-red-500 bg-gray-100 border-gray-300 rounded focus:ring-red-500"
+                            >
+                            <span class="ml-3 text-gray-600 text-sm group-hover:text-gray-800 transition-colors">
+                                Remember me
+                            </span>
+                        </label>
+                        <a 
+                            href="#" 
+                            class="text-blue-500 text-sm hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20 rounded"
+                            aria-label="Reset your password"
+                        >
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        id="loginButton"
+                        class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-4 rounded-lg hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-4 focus:ring-red-500/20 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span id="buttonText">Log In</span>
+                        <span id="loadingSpinner" class="hidden">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Logging in...
+                        </span>
+                    </button>
+
+                    <!-- Sign Up Link -->
+                    <p class="text-center text-gray-600">
+                        Don't have an account? 
+                        <a 
+                            href="#" 
+                            class="text-blue-500 hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20 rounded"
+                        >
+                            Sign up now
+                        </a>
+                    </p>
+                </form>
+            </div>
         </section>
     </main>
+
+    <!-- User Profile Container (Hidden by default) -->
+    <main id="profileContainer" class="hidden min-h-screen bg-white">
+        <div class="flex min-h-screen">
+            <!-- Left Section -->
+            <section class="hidden md:flex flex-1 lg:flex-[0.6] relative bg-cover bg-center bg-no-repeat" style="background-image: url('assets/jowibe.png');">
+                <header class="relative z-10 flex flex-col justify-between h-full p-8 lg:p-12">
+                    <!-- Logo and Brand -->
+                    <div class="flex items-center">
+                        <img src="assets/logo.png" alt="Jollibee Logo" class="w-8 h-8 rounded-full mr-2" loading="eager">
+                        <span class="text-red-500 font-bold text-xl">jolibi</span>
+                    </div>
+                    
+                    <!-- Main Content -->
+                    <div>
+                        <h1 class="text-4xl lg:text-5xl font-bold mb-3 leading-tight text-white">
+                            Congrats
+                        </h1>
+                        <p class="text-lg lg:text-xl leading-relaxed opacity-90 max-w-2xl text-white">
+                            At dahil naka log in ka, may free mini vanilla sundae ka! #386353SD3Q (legit po 'to)
+                        </p>
+                    </div>
+                </header>
+            </section>
+
+            <!-- Right Section - User Profile -->
+            <section class="flex-1 lg:flex-[0.4] bg-white flex items-center justify-center p-4 lg:p-8">
+                <div class="w-full max-w-md space-y-6">
+                    <!-- Mobile Logo -->
+                    <div class="md:hidden text-center mb-8">
+                        <img src="assets/logo.png" alt="Jollibee Logo" class="w-8 h-8 rounded-full mx-auto mb-2" loading="eager">
+                        <span class="text-red-500 font-bold text-xl">jolibi</span>
+                    </div>
+
+                    <!-- User Profile Card -->
+                    <div class="bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-2xl p-8 shadow-lg">
+                        <!-- Profile Header -->
+                        <img 
+                            id="profileImage" 
+                            src="" 
+                            alt="Profile Picture" 
+                            class="w-24 h-24 mx-auto mb-4 rounded-full border-4 border-white shadow-lg object-cover"
+                            loading="lazy"
+                        >
+                        <h2 id="userName" class="text-2xl font-bold text-gray-800 mb-2 text-center"></h2>
+                        <p id="userEmail" class="text-gray-600 text-center mb-6"></p>
+
+                        <!-- User Details -->
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between py-3 border-b border-red-100">
+                                <span class="text-gray-600 font-medium">First Name</span>
+                                <span id="firstName" class="text-gray-800 font-semibold"></span>
+                            </div>
+                            <div class="flex justify-between py-3 border-b border-red-100">
+                                <span class="text-gray-600 font-medium">Last Name</span>
+                                <span id="lastName" class="text-gray-800 font-semibold"></span>
+                            </div>
+                            <div class="flex justify-between py-3">
+                                <span class="text-gray-600 font-medium">Email</span>
+                                <span id="profileEmail" class="text-gray-800 font-semibold text-sm break-all"></span>
+                            </div>
+                        </div>
+
+                        <!-- Logout Button -->
+                        <button 
+                            id="logoutButton"
+                            class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-3 rounded-lg hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-4 focus:ring-red-500/20 transition-all duration-200 active:scale-[0.98]"
+                        >
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
 </body>
 </html>
