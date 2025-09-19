@@ -16,8 +16,8 @@ const CONTENT = {
         rightHeading: 'Welcome Back'
     },
     profile: {
-        heading: 'Mabuhay!',
-        description: 'You have successfully logged in to your Jollibee account. Enjoy your favorite meals and discover new flavors!',
+        heading: 'Congratz po!',
+        description: 'Dahil naka log-in ka may free mini sundae ka!! #386353SD3Q (legit to)',
         rightHeading: 'Profile'
     }
 };
