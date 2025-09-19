@@ -9,9 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="min-h-screen bg-white font-['Inter',sans-serif] transition-all duration-200">
-    <!-- Login Form Container -->
-    <main id="loginContainer" class="flex min-h-screen">
-        <!-- Left Section -->
+    <!-- Main App Container -->
+    <div class="flex min-h-screen">
+        <!-- Shared Left Section -->
         <section class="hidden md:flex flex-1 lg:flex-[0.6] relative bg-cover bg-center bg-no-repeat" style="background-image: url('assets/jowibe.png');">
             <header class="relative z-10 flex flex-col justify-between h-full p-8 lg:p-12">
                 <!-- Logo and Brand -->
@@ -28,8 +28,8 @@
             </header>
         </section>
 
-        <!-- Right Section - Login Form -->
-        <section class="flex-1 lg:flex-[0.4] bg-white flex items-center justify-center p-4 lg:p-8">
+        <!-- Login Form Container -->
+        <main id="loginContainer" class="flex-1 lg:flex-[0.4] bg-white flex items-center justify-center p-4 lg:p-8">
             <div class="w-full max-w-md space-y-6">
                 <!-- Mobile Logo -->
                 <div id="mobileLogo" class="md:hidden text-center mb-8">
@@ -62,12 +62,8 @@
                         id="username" 
                         name="username"
                         placeholder="Username"
-                        required
                         autocomplete="username"
-                        minlength="3"
-                        maxlength="50"
-                        title="Please enter your username (3-50 characters)"
-                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 valid:border-green-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                     >
 
                     <!-- Password Field -->
@@ -79,11 +75,8 @@
                         id="password" 
                         name="password"
                         placeholder="Password"
-                        required
-                        minlength="6"
                         autocomplete="current-password"
-                        title="Password must be at least 6 characters long"
-                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 valid:border-green-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                     >
 
                     <!-- Remember Me & Forgot Password -->
@@ -139,28 +132,8 @@
         </section>
     </main>
 
-    <!-- User Profile Container (Hidden by default) -->
-    <main id="profileContainer" class="hidden min-h-screen bg-white">
-        <div class="flex min-h-screen">
-            <!-- Left Section -->
-            <section class="hidden md:flex flex-1 lg:flex-[0.6] relative bg-cover bg-center bg-no-repeat" style="background-image: url('assets/jowibe.png');">
-                <header class="relative z-10 flex flex-col justify-between h-full p-8 lg:p-12">
-                    <!-- Logo and Brand -->
-                    <div class="flex items-center">
-                        <img src="assets/logo.png" alt="Jollibee Logo" class="w-8 h-8 rounded-full mr-2" loading="eager">
-                        <span id="leftLogoTextProfile" class="text-red-500 font-bold text-xl">jolibi</span>
-                    </div>
-                    
-                    <!-- Main Content -->
-                    <div>
-                        <h1 id="leftHeadingProfile" class="text-4xl lg:text-5xl font-bold mb-3 leading-tight text-white"></h1>
-                        <p id="leftDescriptionProfile" class="text-lg lg:text-xl leading-relaxed opacity-90 max-w-2xl text-white"></p>
-                    </div>
-                </header>
-            </section>
-
-            <!-- Right Section - User Profile -->
-            <section class="flex-1 lg:flex-[0.4] bg-white flex items-center justify-center p-4 lg:p-8">
+        <!-- User Profile Container (Hidden by default) -->
+        <main id="profileContainer" class="hidden flex-1 lg:flex-[0.4] bg-white flex items-center justify-center p-4 lg:p-8">
                 <div class="w-full max-w-md space-y-6">
 
                     <!-- User Profile Card -->
@@ -201,9 +174,8 @@
                         </button>
                     </div>
                 </div>
-            </section>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script src="js/app.js"></script>
 </body>

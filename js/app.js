@@ -1,4 +1,4 @@
-// Jollibee Login App - Single Page Application
+// Jollibee Login App 
 
 // Configuration
 const CONFIG = {
@@ -8,14 +8,36 @@ const CONFIG = {
     PLACEHOLDER_IMAGE: 'https://via.placeholder.com/150/ef4444/ffffff'
 };
 
+// Content Data
+const CONTENT = {
+    login: {
+        heading: 'Bida ang saya!',
+        description: 'Mula sa unang kagat ng Chickenjoy hanggang sa tamis ng Jolly Spaghetti, bawat bisita ay nadadala sa mundo ng saya at ligaya. Dito sa Jollibee, bawat pagkain ay kwento, bawat tawa ay espesyal, at bawat sandali ay puno ng kasiyahan. Halina\'t maranasan ang saya na hatid ng paboritong bida ng bawat pamilya—Jollibee!',
+        rightHeading: 'Welcome Back'
+    },
+    profile: {
+        heading: 'Mabuhay!',
+        description: 'You have successfully logged in to your Jollibee account. Enjoy your favorite meals and discover new flavors!',
+        rightHeading: 'Profile'
+    }
+};
+
+// DOM Helper
+const getElement = (id) => document.getElementById(id);
+
 // API Service
 const API = {
     async checkUserExists(username) {
-        const response = await fetch(`https://dummyjson.com/users/search?q=${username}`);
-        if (!response.ok) return false;
-        
-        const data = await response.json();
-        return data.users.some(user => user.username === username);
+        try {
+            const response = await fetch(`https://dummyjson.com/users/search?q=${username}`);
+            if (!response.ok) return false;
+            
+            const data = await response.json();
+            return data.users.some(user => user.username === username);
+        } catch (error) {
+            console.error('Error checking user existence:', error);
+            return false;
+        }
     },
 
     async login(username, password) {
@@ -36,9 +58,6 @@ const API = {
         return response.json();
     }
 };
-
-// DOM Helper
-const getElement = (id) => document.getElementById(id);
 
 // UI Management
 const UI = {
@@ -74,6 +93,17 @@ const UI = {
         if (loadingSpinner) loadingSpinner.classList.add('hidden');
     },
 
+    updateContent(type) {
+        const content = CONTENT[type];
+        const leftHeading = getElement('leftHeading');
+        const leftDescription = getElement('leftDescription');
+        const rightHeading = getElement('rightHeading');
+        
+        if (leftHeading) leftHeading.textContent = content.heading;
+        if (leftDescription) leftDescription.textContent = content.description;
+        if (rightHeading) rightHeading.textContent = content.rightHeading;
+    },
+
     showProfile(userData) {
         const { firstName, lastName, email, image } = userData;
         
@@ -92,56 +122,40 @@ const UI = {
         if (lastNameEl) lastNameEl.textContent = lastName;
         if (profileEmail) profileEmail.textContent = email;
         
-        // Update left sidebar content
-        const leftHeading = getElement('leftHeadingProfile');
-        const leftDescription = getElement('leftDescriptionProfile');
-        const leftLogoText = getElement('leftLogoTextProfile');
-        
-        if (leftHeading) leftHeading.textContent = 'Mabuhay!';
-        if (leftDescription) leftDescription.textContent = 'You have successfully logged in to your Jollibee account. Enjoy your favorite meals and discover new flavors!';
-        if (leftLogoText) leftLogoText.textContent = 'jolibi';
-        
-        // Update right section heading
-        const rightHeading = getElement('rightHeading');
-        if (rightHeading) rightHeading.textContent = 'Profile';
-        
-        // Setup logout button
-        const logoutButton = getElement('logoutButton');
-        if (logoutButton) {
-            logoutButton.addEventListener('click', this.showLogin);
-        }
-        
-        // Switch views
-        const loginContainer = getElement('loginContainer');
-        const profileContainer = getElement('profileContainer');
-        
-        if (loginContainer) loginContainer.classList.add('hidden');
-        if (profileContainer) profileContainer.classList.remove('hidden');
+        // Update content and setup logout
+        UI.updateContent('profile');
+        UI.setupLogout();
+        UI.switchViews('profile');
     },
     
     showLogin() {
         localStorage.removeItem(CONFIG.TOKEN_KEY);
+        UI.updateContent('login');
+        UI.switchViews('login');
+        UI.hideError();
         
-        // Reset left sidebar content
-        const leftHeading = getElement('leftHeading');
-        const leftDescription = getElement('leftDescription');
-        
-        if (leftHeading) leftHeading.textContent = 'Bida ang saya!';
-        if (leftDescription) leftDescription.textContent = 'Mula sa unang kagat ng Chickenjoy hanggang sa tamis ng Jolly Spaghetti, bawat bisita ay nadadala sa mundo ng saya at ligaya. Dito sa Jollibee, bawat pagkain ay kwento, bawat tawa ay espesyal, at bawat sandali ay puno ng kasiyahan. Halina\'t maranasan ang saya na hatid ng paboritong bida ng bawat pamilya—Jollibee!';
-        
-        // Reset right section heading
-        const rightHeading = getElement('rightHeading');
-        if (rightHeading) rightHeading.textContent = 'Welcome Back';
-        
-        const profileContainer = getElement('profileContainer');
-        const loginContainer = getElement('loginContainer');
         const loginForm = getElement('loginForm');
-        
-        if (profileContainer) profileContainer.classList.add('hidden');
-        if (loginContainer) loginContainer.classList.remove('hidden');
         if (loginForm) loginForm.reset();
+    },
+
+    setupLogout() {
+        const logoutButton = getElement('logoutButton');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', UI.showLogin);
+        }
+    },
+
+    switchViews(view) {
+        const loginContainer = getElement('loginContainer');
+        const profileContainer = getElement('profileContainer');
         
-        this.hideError();
+        if (view === 'profile') {
+            if (loginContainer) loginContainer.classList.add('hidden');
+            if (profileContainer) profileContainer.classList.remove('hidden');
+        } else {
+            if (profileContainer) profileContainer.classList.add('hidden');
+            if (loginContainer) loginContainer.classList.remove('hidden');
+        }
     }
 };
 
@@ -155,7 +169,7 @@ const Auth = {
             // First check if username exists
             const userExists = await API.checkUserExists(username);
             if (!userExists) {
-                UI.showError('Invalid credentials. Please try again.');
+                UI.showError('User does not exist. Please check your credentials.');
                 return;
             }
 
@@ -224,15 +238,11 @@ const Events = {
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
     Events.init();
+    UI.updateContent('login');
     
-    // Initialize left sidebar content
-    const leftHeading = getElement('leftHeading');
-    const leftDescription = getElement('leftDescription');
+    // Initialize logo text
     const leftLogoText = getElement('leftLogoText');
     const mobileLogoText = getElement('mobileLogoText');
-    
-    if (leftHeading) leftHeading.textContent = 'Bida ang saya!';
-    if (leftDescription) leftDescription.textContent = 'Mula sa unang kagat ng Chickenjoy hanggang sa tamis ng Jolly Spaghetti, bawat bisita ay nadadala sa mundo ng saya at ligaya. Dito sa Jollibee, bawat pagkain ay kwento, bawat tawa ay espesyal, at bawat sandali ay puno ng kasiyahan. Halina\'t maranasan ang saya na hatid ng paboritong bida ng bawat pamilya—Jollibee!';
     if (leftLogoText) leftLogoText.textContent = 'jolibi';
     if (mobileLogoText) mobileLogoText.textContent = 'jolibi';
 });
